@@ -2,6 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
+#include"structure.h"
+#include"modeG.h"
+#include"modeL.h"
+
 
 
 FILE *ouverture_dictionnaire(char **argv){
