@@ -22,7 +22,7 @@ void modeG_sans_fichier()
 			break;
 
 		default : 
-			printf("\n\tVotre choix n'est pas dans la liste. SHA256 par défaut");
+			printf("/!\\ Votre choix n'est pas dans la liste. SHA256 par défaut\n");
 	}
 
 
@@ -106,16 +106,90 @@ void modeG_sans_fichier()
 void modeG_avec_fichier(FILE *fichier)
 {
 	printf("\n\n--------{ Début du mode G avec fichier: }--------\n\n");
-	
-	//Prompter un choix pour les algorithmes de chifffrement des mots
 
-	//Lire chaque mots du fichier, 
-	//Générer un condensat
-	//Stocker la données dans un nouvel élément de la structure de données
-	//'Ranger' cet élément dans l'arbre
-	//Une fois le fichier fini, exporter l'arbre vers un fichier T3C
-	//
-	//Proposer des algo différents pour le condensat
+	printf("\n!============================================================!");
+	printf("\n!             Les algorithmes disponibles sont :             !");
+	printf("\n! 1. SHA256                                                  !");
+	printf("\n!============================================================!");
+	
+	int choix = 0;
+	printf("\nVeuillez saisir le numéro associé à l'algorithme souhaité : ");
+	scanf("%d", &choix);
+
+	switch (choix)
+	{	
+		case 1 : 
+			printf("/!\\ Vous avez choisi l'algo 1\n");
+			break;
+
+		default : 
+			printf("/!\\ Votre choix n'est pas dans la liste. SHA256 par défaut\n");
+	}
+	
+		
+	printf("\n!============================================================!");
+	printf("\n!         Nous lisons les entrées d'un dictionnaire          !");
+	printf("\n!============================================================!");
+	
+	char input[100];
+	int indice = 0;
+	node_t *my_tree;
+
+	while(fscanf(fichier,"%99s", input) != EOF)
+	{
+		printf("\n[%d] - %s", indice, input);
+		
+		char condensat[SHA256_HEX_SIZE];
+		sha256_hex(input, strlen(input), condensat);
+		printf("\n-> %s", condensat);
+
+		node_t *my_node = create_node(input, condensat);
+		if(my_node != NULL){ printf("\n/!\\ Vous avez initialisé un nouveau noeud\n"); }
+                //display_node(my_node);
+		
+		if(indice == 0){ my_tree = my_node; }
+		else { insert_node(my_tree, my_node); }
+
+		indice++;
+	}
+	//display_tree(my_tree);
+	
+
+	printf("\n!============================================================!");
+        printf("\n!  Souhaitez-vous sauvegarder l'arbre dans un fichier T3C ?  !");
+        printf("\n!                      1. Oui | 2. Non                       !");
+        printf("\n!============================================================!");
+        printf("\n[choix] - "); 
+
+        int sauvegarde = 0;
+        scanf("%d", &sauvegarde);
+
+        switch (sauvegarde)
+        {
+                case 1 : 
+                        printf("/!\\ Vous avez choisi de sauvegarder\n");
+
+                        printf("\nVeuillez entrer le nom de votre fichier de sauvegarde : ");
+                        char nom[50];
+                        scanf("%s", nom);
+
+                        FILE *fichier1 = fopen(nom, "w");
+                        to_file(my_tree, fichier1);
+                        fclose(fichier1);
+
+                        break;
+
+                case 2 : 
+                        printf("/!\\ Vous avez choisi de ne pas sauvegarder\n");
+                        break;
+
+                default : 
+                        printf("\n\tVotre choix n'est pas dans la liste. Sauvegarde dans ./default");
+
+                        FILE *fichier2 = fopen("default", "w");
+                        to_file(my_tree, fichier2);
+                        fclose(fichier2);
+        }	
 	
 	printf("\n-----------{ Fin du mode G avec fichier: }-----------\n");
 }
