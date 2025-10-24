@@ -81,57 +81,54 @@ void to_file(node_t *my_tree, FILE *fichier)
 	}	
 }
 
+//Si j'étais quelqu'un de propre je devrais faire un fichier .c et .h pour contenir
+//cette fonction et l'appeler proprement ici. Mais je ne suis pas quelqu'un de propre
+//i.e. j'ai la flemme, en plus ça va complexifier le makefile pour rien alors que
+//j'ai déjà du mal...
+void split_line(const char *line, char *mot, char *condensat)
+{
+	const char *debut = line;
+	const char *fin = debut + strlen(debut);
+
+	const char *separateur = debut;
+	while(separateur < fin && *separateur != ';')
+	{
+		separateur++;
+	}
+
+	size_t taille_mot = separateur - debut;
+	strncpy(mot, debut, taille_mot);
+	mot[taille_mot] = '\0';
+
+	if(separateur < fin)
+	{
+		strncpy(condensat, separateur + 1, fin - (separateur + 1));
+		condensat[fin - (separateur + 1)] = '\0';
+	}
+	else
+	{
+		condensat[0] = '\0';
+	}
+	//Spécial dédicace, merci à ce monsieur sur Reddit : 
+	//https://www.reddit.com/r/cprogramming/comments/189qdn3/comment/kbsuso3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+}
+
 node_t *from_file(FILE *fichier)
-{	
-	fprintf(stdout,"\nOn récupère un arbre depuis un fichier");
-
+{
 	char *ligne;
-	fscanf(fichier,"%s", ligne);
 	
-	
-
-	node_t my_tree;
-	node_t my_node;
-
-	int indice = 0;
 	while(fscanf(fichier,"%s", ligne) != EOF)
 	{
-
-		printf("\n\t\tVivant");	
-		fprintf(stdout,"\n[%d] - %s", indice, &ligne);
-		printf("\n\t\tVivant");	
+		printf("\n%s", ligne);
 		
+		char mot[100];
+		char condensat[65];
+		split_line(ligne, mot, condensat);
 
-		char *mot = strtok(ligne, " ; ");	
-		char *condensat = strtok(NULL, " ; ");
-
-		fprintf(stdout,"\n\t%s", mot);
-		fprintf(stdout,"\n\t%s", condensat);
-		
-
-		if(indice == 0)
-		{	
-			my_tree = create_node(mot, condensat);
-			display_node(&my_tree);
-		}
-		else 
-		{
-			my_node = create_node(mot, condensat);
-			display_node(&my_node);
-			insert_node(&my_tree, &my_node);
-			display_tree(&my_tree);
-		}
-
-		fprintf(stdout,"\nMise à jour de l'arbre");
-		indice = indice + 1;
-		free_node(&my_node);
-		free(mot);
-		free(condensat);
+		printf("\n\tMot : %s\n\tCondensat : %s", mot, condensat);
 
 	}
-	fprintf(stdout,"\nOn affiche l'arbre obtenu");
-	display_tree(&my_tree);
-	return NULL;
+	return NULL;		
 }
 
 
@@ -172,7 +169,8 @@ int main()
 	fichier1 = fopen("./fichierT3C", "w");
 	to_file(&tree, fichier1);
 	fclose(fichier1);
-
+	
+	printf("\n\n\tTEST from_file");
 	FILE *fichier2;
 	fichier2 = fopen("./fichierT3C", "r");
 	node_t *test = from_file(fichier2);
