@@ -201,40 +201,40 @@ void modeG_avec_fichier(FILE *fichier)
 	
 
 	printf("\n!============================================================!");
-        printf("\n!  Souhaitez-vous sauvegarder l'arbre dans un fichier T3C ?  !");
-        printf("\n!                      1. Oui | 2. Non                       !");
-        printf("\n!============================================================!");
-        printf("\n[choix] - "); 
+	printf("\n!  Souhaitez-vous sauvegarder l'arbre dans un fichier T3C ?  !");
+	printf("\n!                      1. Oui | 2. Non                       !");
+	printf("\n!============================================================!");
+	printf("\n[choix] - "); 
 
-        int sauvegarde = 0;
-        scanf("%d", &sauvegarde);
+	int sauvegarde = 0;
+	scanf("%d", &sauvegarde);
 
-        switch (sauvegarde)
-        {
-                case 1 : 
-                        printf("/!\\ Vous avez choisi de sauvegarder\n");
+	switch (sauvegarde)
+	{
+			case 1 : 
+					printf("/!\\ Vous avez choisi de sauvegarder\n");
 
-                        printf("\nVeuillez entrer le nom de votre fichier de sauvegarde : ");
-                        char nom[50];
-                        scanf("%s", nom);
+					printf("\nVeuillez entrer le nom de votre fichier de sauvegarde : ");
+					char nom[50];
+					scanf("%s", nom);
 
-                        FILE *fichier1 = fopen(nom, "w");
-                        to_file(my_tree, fichier1);
-                        fclose(fichier1);
+					FILE *fichier1 = fopen(nom, "w");
+					to_file(my_tree, fichier1);
+					fclose(fichier1);
 
-                        break;
+					break;
 
-                case 2 : 
-                        printf("/!\\ Vous avez choisi de ne pas sauvegarder\n");
-                        break;
+			case 2 : 
+					printf("/!\\ Vous avez choisi de ne pas sauvegarder\n");
+					break;
 
-                default : 
-                        printf("\n\tVotre choix n'est pas dans la liste. Sauvegarde dans ./default");
+			default : 
+					printf("\n\tVotre choix n'est pas dans la liste. Sauvegarde dans ./default");
 
-                        FILE *fichier2 = fopen("default", "w");
-                        to_file(my_tree, fichier2);
-                        fclose(fichier2);
-        }	
+					FILE *fichier2 = fopen("default", "w");
+					to_file(my_tree, fichier2);
+					fclose(fichier2);
+	}	
 	
 	printf("\n-----------{ Fin du mode G avec fichier: }-----------\n");
 }

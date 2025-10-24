@@ -7,8 +7,8 @@ void modeL_avec_fichier(FILE *fichier)
 	printf("\n\n------------{ Début du mode L avec fichier: }-----------\n\n");
 
 	printf("\n!============================================================!");
-        printf("\n!     Nous récupérons les entrées d'un dictionnaire T3C      !");
-        printf("\n!============================================================!");
+	printf("\n!     Nous récupérons les entrées d'un dictionnaire T3C      !");
+	printf("\n!============================================================!");
 	
 	node_t *my_tree = from_file(fichier);
 	if(my_tree == NULL)
@@ -19,12 +19,12 @@ void modeL_avec_fichier(FILE *fichier)
 
 
 	printf("\n!============================================================!");
-        printf("\n!         Veuillez entrer une condensat à rechercher         !");
-        printf("\n!            (Entrez 'FIN' pour quitter ce mode)!            !");
-        printf("\n!============================================================!");
+	printf("\n!         Veuillez entrer une condensat à rechercher         !");
+	printf("\n!            (Entrez 'FIN' pour quitter ce mode)!            !");
+	printf("\n!============================================================!");
 
-        char input[100];
-        int indice = 0;
+	char input[100];
+	int indice = 0;
 	node_t *my_node;
 
 	while(1)
@@ -38,10 +38,6 @@ void modeL_avec_fichier(FILE *fichier)
 		if(my_node == NULL){ printf("Le condensat recherché n'est pas connu!\n"); }
 		else{ printf("Le condensat recherché correspond à la chaîne de caractères : %s\n", my_node->mot); }
 	}
-	
-	//Charger depuis le fichier un T3C dans une structure d'arbre binaire de recherche
-	//Récupérer depuis l'entrée utilisateur un condensat et rendre le mot associé s'il est dans la structure de données
-	//On peut recevoir un salve de condensats à rechercher séparé par un \n
 	
 	printf("\n------------{ Fin du mode G avec fichier: }-------------\n");
 }

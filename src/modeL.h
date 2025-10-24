@@ -9,8 +9,6 @@
 #include"structure.h"
 
 
-void modeL_sans_fichier();
-
 void modeL_avec_fichier(FILE *fichier);
 
 
