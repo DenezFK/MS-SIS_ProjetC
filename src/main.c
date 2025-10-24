@@ -31,13 +31,11 @@ void choix(int argc, char **argv){
 	{	
 		if(!strcmp(argv[1], "-G"))
 		{ 
-			//printf("Mode G sélectionné !\n"); 
 			modeG_sans_fichier();
 		}
 		else if(!strcmp(argv[1], "-L"))
 		{ 
-			//printf("Mode L sélectionné !\n"); 
-			modeL_sans_fichier();
+			printf("Le mode L nécessite un fichier T3C en entrée !\n"); 
 		}
 		else 
 		{

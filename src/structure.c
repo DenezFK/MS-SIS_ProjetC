@@ -139,7 +139,7 @@ node_t *from_file(FILE *fichier)
 		printf("\n\tMot : %s\n\tCondensat : %s", mot, condensat);
 		
 		node_t *my_node = create_node(mot, condensat);	
-		display_node(my_node);
+		//display_node(my_node);
 		
 		if(indice == 0)
 		{
@@ -154,7 +154,7 @@ node_t *from_file(FILE *fichier)
 
 		indice++;
  	}
-	display_tree(my_tree);
+
 	return my_tree;		
 }
 
