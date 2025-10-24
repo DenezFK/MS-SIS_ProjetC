@@ -23,6 +23,17 @@ void free_node(node_t *my_node)
 	{
 		free(my_node->mot);
 		free(my_node->condensat);
+		free(my_node);
+	}
+}
+
+void free_tree(node_t *my_tree)
+{
+	if(my_tree != NULL)
+	{
+		if(my_tree->g != NULL){ free_tree(my_tree->g); }
+		if(my_tree->d != NULL){ free_tree(my_tree->d); }
+		free_node(my_tree);
 	}
 }
 
@@ -43,16 +54,8 @@ void display_tree(node_t *my_tree)
 	if(my_tree != NULL)
 	{
 		display_node(my_tree);
-		if(my_tree->g != NULL)
-		{	
-			printf("\n\tGauche non nulle");
-			display_tree(my_tree->g);
-		}
-		if(my_tree->d != NULL)
-		{
-			printf("\n\tDroite non nulle");
-			display_tree(my_tree->d);
-		}
+		if(my_tree->g != NULL){ display_tree(my_tree->g); }
+		if(my_tree->d != NULL){ display_tree(my_tree->d); }
 	}
 }
 
@@ -71,6 +74,10 @@ void insert_node(node_t *my_tree, node_t *my_node)
 			if(my_tree->d != NULL){ insert_node(my_tree->d, my_node); }
 			else if(my_tree->d == NULL){ my_tree->d = my_node; }
 		}	
+	}
+	else
+	{
+		my_tree = my_node;
 	}
 }
 
@@ -142,7 +149,6 @@ node_t *from_file(FILE *fichier)
 		else
 		{
 			printf("\nOn initialise un nouveau noeud de l'arbre");
-			my_node = my_node;
 			insert_node(my_tree, my_node);
 		}
 
@@ -233,7 +239,7 @@ node_t *search_from_hash(node_t *my_tree, char *condensat)
 
 	
 	printf("\n\n\t Search_From_Hash");
-	char *condensat = "b";
+	char *condensat = "a";
 	node_t *trouve = search_from_hash(tree, condensat);
 	if(trouve != NULL){ display_node(trouve); }
 	else{ printf("\nTrouve était null"); }	

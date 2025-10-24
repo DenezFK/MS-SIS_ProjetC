@@ -12,6 +12,8 @@ node_t *create_node(char *mot, char *condensat);
 
 void free_node(node_t *my_node);
 
+void free_tree(node_t *my_tree);
+
 void display_node(node_t *my_node);
 
 void display_tree(node_t *my_tree);
