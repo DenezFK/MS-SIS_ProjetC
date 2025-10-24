@@ -187,7 +187,7 @@ node_t *search_from_hash(node_t *my_tree, char *condensat)
 
 
 
-int main()
+/*int main()
 {
 	printf("Hello, Main\n");
 
@@ -241,4 +241,4 @@ int main()
 
 
 	return 0;
-}
+}*/

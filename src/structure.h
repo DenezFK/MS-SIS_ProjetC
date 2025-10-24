@@ -8,7 +8,22 @@ typedef struct node{
 	struct node *d;
 } node_t;
 
-//Ajouter les prototypes des méthodes associées à la structure
+node_t *create_node(char *mot, char *condensat);
 
+void free_node(node_t *my_node);
+
+void display_node(node_t *my_node);
+
+void display_tree(node_t *my_tree);
+
+void insert_node(node_t *my_tree, node_t *my_node);
+
+void to_file(node_t *my_tree, FILE *fichier);
+
+void split_line(const char *line, char *mot, char *condensat);
+
+node_t *from_file(FILE *fichier);
+
+node_t *search_from_hash(node_t *my_tree, char *condensat);
 
 #endif
