@@ -5,8 +5,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<stdint.h>
 
 #include"sha256.h"
+#include"md5.h"
 #include"structure.h"
 
 
