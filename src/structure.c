@@ -5,13 +5,14 @@
 
 
 
-node_t create_node(char *mot, char *condensat)
+node_t *create_node(char *mot, char *condensat)
 {
-	node_t my_node;
-	my_node.mot = mot;
-	my_node.condensat = condensat;
-	my_node.g = NULL;
-	my_node.d = NULL;
+	node_t *my_node = malloc(sizeof(node_t));
+	
+	my_node->mot = strdup(mot);
+	my_node->condensat = strdup(condensat);
+	my_node->g = NULL;
+	my_node->d = NULL;
 	
 	return my_node;	
 }
@@ -115,19 +116,37 @@ void split_line(const char *line, char *mot, char *condensat)
 
 node_t *from_file(FILE *fichier)
 {
-	char *ligne;
-	
+	char ligne[200];
+	node_t *my_tree;
+	int indice = 0;	
+
 	while(fscanf(fichier,"%s", ligne) != EOF)
 	{
-		printf("\n%s", ligne);
+		printf("\n\n[%d] - %s", indice, ligne);
 		
 		char mot[100];
 		char condensat[65];
 		split_line(ligne, mot, condensat);
-
 		printf("\n\tMot : %s\n\tCondensat : %s", mot, condensat);
+		
+		node_t *my_node = create_node(mot, condensat);	
+		display_node(my_node);
+		
+		if(indice == 0)
+		{
+			printf("\nOn initialise la racine de l'arbre");
+			my_tree = my_node;
+		}
+		else
+		{
+			printf("\nOn initialise un nouveau noeud de l'arbre");
+			my_node = my_node;
+			insert_node(my_tree, my_node);
+		}
 
-	}
+		indice++;
+ 	}
+	display_tree(my_tree);
 	return NULL;		
 }
 
@@ -141,33 +160,33 @@ int main()
 	printf("\nOn affiche la racine");
 	char *mot0 = "TestRacine";
 	char *condensat0 = "ffeljbflkejbfffezfkje";
-	node_t tree = create_node(mot0, condensat0);
+	node_t *tree = create_node(mot0, condensat0);
 	//display_node(&tree);
 
 	printf("\nOn affiche le premier noeud");
 	char *mot1 = "LeMotDePasseDeVincent";
 	char *condensat1 = "fjlhqvfjknfqlkhjcbelf";
-	node_t obj1 = create_node(mot1, condensat1);
+	node_t *obj1 = create_node(mot1, condensat1);
 	//display_node(&obj1);
 
 	printf("\nOn affiche le second noeud");
 	char *mot2 = "LeMotDePasseDeThomas";
 	char *condensat2 = "mjklfjnzefnzekfnezkfn";
-	node_t obj2 = create_node(mot2, condensat2);
+	node_t *obj2 = create_node(mot2, condensat2);
 	//display_node(&obj2);
 	
 	printf("\nOn affiche la racine après chaque insert");
-	insert_node(&tree, &obj1);
+	insert_node(tree, obj1);
 	//display_node(&tree);
-	insert_node(&tree, &obj2);
+	insert_node(tree, obj2);
 	//display_node(&tree);
 	
 	printf("\nOn affiche l'arbre");
-	display_tree(&tree);
+	display_tree(tree);
 
 	FILE *fichier1;
 	fichier1 = fopen("./fichierT3C", "w");
-	to_file(&tree, fichier1);
+	to_file(tree, fichier1);
 	fclose(fichier1);
 	
 	printf("\n\n\tTEST from_file");
