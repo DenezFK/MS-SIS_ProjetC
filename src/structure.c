@@ -44,11 +44,13 @@ void display_tree(node_t *my_tree)
 	{
 		display_node(my_tree);
 		if(my_tree->g != NULL)
-		{
+		{	
+			printf("\n\tGauche non nulle");
 			display_tree(my_tree->g);
 		}
-		else if(my_tree->d != NULL)
+		if(my_tree->d != NULL)
 		{
+			printf("\n\tDroite non nulle");
 			display_tree(my_tree->d);
 		}
 	}
@@ -147,7 +149,40 @@ node_t *from_file(FILE *fichier)
 		indice++;
  	}
 	display_tree(my_tree);
-	return NULL;		
+	return my_tree;		
+}
+
+node_t *search_from_hash(node_t *my_tree, char *condensat)
+{	
+	if(my_tree == NULL)
+	{
+		return NULL;
+	}
+	else
+	{
+		int comparaison = strcmp(condensat, my_tree->condensat);
+
+		if(comparaison == 0)
+		{
+			return my_tree;
+		}
+		else if(comparaison > 0)
+		{
+			if(my_tree->d != NULL)
+			{ 
+				return search_from_hash(my_tree->d, condensat); 
+			}
+			else { return NULL; }
+		}
+		else if(comparaison < 0)
+		{
+			if(my_tree->g != NULL)
+			{
+				return search_from_hash(my_tree->g, condensat); 
+			}
+			else { return NULL; }
+		}
+	}
 }
 
 
@@ -157,31 +192,31 @@ int main()
 	printf("Hello, Main\n");
 
 		
-	printf("\nOn affiche la racine");
+	printf("\n\nOn affiche la racine");
 	char *mot0 = "TestRacine";
-	char *condensat0 = "ffeljbflkejbfffezfkje";
+	char *condensat0 = "b";
 	node_t *tree = create_node(mot0, condensat0);
-	//display_node(&tree);
+	display_node(tree);
 
-	printf("\nOn affiche le premier noeud");
+	printf("\n\nOn affiche le premier noeud");
 	char *mot1 = "LeMotDePasseDeVincent";
-	char *condensat1 = "fjlhqvfjknfqlkhjcbelf";
+	char *condensat1 = "c";
 	node_t *obj1 = create_node(mot1, condensat1);
-	//display_node(&obj1);
+	display_node(obj1);
 
-	printf("\nOn affiche le second noeud");
+	printf("\n\nOn affiche le second noeud");
 	char *mot2 = "LeMotDePasseDeThomas";
-	char *condensat2 = "mjklfjnzefnzekfnezkfn";
+	char *condensat2 = "a";
 	node_t *obj2 = create_node(mot2, condensat2);
-	//display_node(&obj2);
+	display_node(obj2);
 	
-	printf("\nOn affiche la racine après chaque insert");
+	printf("\n\nOn affiche la racine après chaque insert");
 	insert_node(tree, obj1);
-	//display_node(&tree);
+	display_node(tree);
 	insert_node(tree, obj2);
-	//display_node(&tree);
+	display_node(tree);
 	
-	printf("\nOn affiche l'arbre");
+	printf("\n\nOn affiche l'arbre");
 	display_tree(tree);
 
 	FILE *fichier1;
@@ -194,6 +229,14 @@ int main()
 	fichier2 = fopen("./fichierT3C", "r");
 	node_t *test = from_file(fichier2);
 	fclose(fichier2);
+	display_tree(test);
+
+	
+	printf("\n\n\t Search_From_Hash");
+	char *condensat = "b";
+	node_t *trouve = search_from_hash(tree, condensat);
+	if(trouve != NULL){ display_node(trouve); }
+	else{ printf("\nTrouve était null"); }	
 
 
 
