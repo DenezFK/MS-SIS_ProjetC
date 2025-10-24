@@ -31,11 +31,13 @@ void choix(int argc, char **argv){
 	{	
 		if(!strcmp(argv[1], "-G"))
 		{ 
-			printf("Mode G sélectionné !\n"); 
+			//printf("Mode G sélectionné !\n"); 
+			modeG_sans_fichier();
 		}
 		else if(!strcmp(argv[1], "-L"))
 		{ 
-			printf("Mode L sélectionné !\n"); 
+			//printf("Mode L sélectionné !\n"); 
+			modeL_sans_fichier();
 		}
 		else 
 		{
@@ -46,16 +48,16 @@ void choix(int argc, char **argv){
 	{
 		if(!strcmp(argv[1], "-G"))
 		{
-			printf("Mode G sélectionné !\n");	
+			//printf("Mode G sélectionné !\n");	
 			FILE *fichier = ouverture_dictionnaire(argv);
-			//Appel fonction
+			modeG_avec_fichier(fichier);
 			fclose(fichier);
 		}
 		else if(!strcmp(argv[1], "-L"))
 		{ 
-			printf("Mode L sélectionné !\n"); 
+			//printf("Mode L sélectionné !\n"); 
 			FILE *fichier = ouverture_dictionnaire(argv);
-			//Appel fonction
+			modeL_avec_fichier(fichier);
 			fclose(fichier);
 		}
 		else 

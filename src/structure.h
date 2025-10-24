@@ -1,12 +1,15 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
+
+
 typedef struct node{
 	char *mot;
 	char *condensat;
 	struct node *g;
 	struct node *d;
 } node_t;
+
 
 node_t *create_node(char *mot, char *condensat);
 
@@ -27,5 +30,7 @@ void split_line(const char *line, char *mot, char *condensat);
 node_t *from_file(FILE *fichier);
 
 node_t *search_from_hash(node_t *my_tree, char *condensat);
+
+
 
 #endif

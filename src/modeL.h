@@ -1,8 +1,16 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-//ICI il faut indiquer tous les prototypes des fonctions utilisées dans modeL.c
-void landing_modeL(FILE * fichier);
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+
+
+void modeL_sans_fichier();
+
+void modeL_avec_fichier(FILE *fichier);
+
 
 
 #endif
