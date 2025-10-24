@@ -36,7 +36,7 @@ void modeL_avec_fichier(FILE *fichier)
 
 		my_node = search_from_hash(my_tree, input);
 		if(my_node == NULL){ printf("Le condensat recherché n'est pas connu!\n"); }
-		else{ printf("Le condensat recherché correspond à la chaîne de caractèress : %s\n", my_node->mot); }
+		else{ printf("Le condensat recherché correspond à la chaîne de caractères : %s\n", my_node->mot); }
 	}
 		
 	printf("\n------------{ Fin du mode G avec fichier: }-------------\n");
