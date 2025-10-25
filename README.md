@@ -37,13 +37,13 @@ Positionnez-vous à la racine du projet (`./MS-SIS_ProjetC/`).
 
 **Compilation :**  
 ```$ make```  
-Le terminal foit alors vous renvoyer la réponse suivante :  
+Le terminal doit alors vous renvoyer la réponse suivante :  
 ```gcc main.c modeG.c modeL.c structure.c sha256.c md5.c -o main```  
 Le projet est compilé, vous pouvez passer à l'exécution !
 
 **Nettoyage :**  
 ```$ make clean```  
-Le terminal foit alors vous renvoyer la réponse suivante :  
+Le terminal doit alors vous renvoyer la réponse suivante :  
 ```rm -f main```  
 Le projet est nettoyé, vous pouvez compiler de nouveau !
 
@@ -54,6 +54,11 @@ Le projet est nettoyé, vous pouvez compiler de nouveau !
 Permet de lancer le programme sans aucune option. Le projet vous indiquera une erreur.
 ```$ make && ./main -OPTION /chemin/vers/fichier```
 Permet de lancer le programme avec une option (`-G` ou `-L`) et un chemin vers un fichier (absolu ou relatif).
+
+
+### Format T3C :
+Le formet T3C que j'ai choisi d'implémenter est inclu dans `structure.c`. Chaque nœud de mon arbre binaire de recherche est converti en une ligne de forme : `mot;condensat\n` avec le séparateur `;`. Cela permet de stocker de manière efficace les données et de le récupérer de manière tout autant efficace.  
+
 
 ### Mode G : Generate
 
@@ -90,7 +95,7 @@ Le programme demande alors à l'utilisateur s'il souhaite sauvegarder son travai
 - S'il entre 2, on ne sauvegarde pas les données dans un fichier T3C. - S'il entre n'importe quoi d'autre les données sont automatiquement sauvegardées dans un fichier T3C `./default`  
 
 ### Mode L : Lookup
-Afin de lancer le programme en mode L il faut simplement fournir l'argument `-G` ainsi qu'un chemin vers un fichier T3C à l'exécution ;  
+Afin de lancer le programme en mode L il faut simplement fournir l'argument `-L` ainsi qu'un chemin vers un fichier T3C à l'exécution ;  
 ```$ make && ./main -L ./default```  
 
 Le programme charge alors automatiquement ce fichier T3C en mémoire dans la structure d'un arbre binaire de recherche.  
