@@ -145,8 +145,8 @@ void modeG_avec_fichier(FILE *fichier)
 			printf("/!\\ Vous avez choisi l'algo SHA256\n");
 			break;
 		case 2 :
-                        printf("/!\\ Vous avez choisi l'algo MD5\n");
-                        break;
+			printf("/!\\ Vous avez choisi l'algo MD5\n");
+			break;
 
 		default : 
 			printf("/!\\ Votre choix n'est pas dans la liste. SHA256 par défaut\n");
@@ -169,19 +169,19 @@ void modeG_avec_fichier(FILE *fichier)
 		if(choix == 2)
 		{
 			uint8_t condensat[16];
-                        md5String(input, condensat);
+			md5String(input, condensat);
 
-                        char condensat_hexa[33];
-                        for(int i=0; i<33; i++)
-                        {
-                                sprintf(condensat_hexa + 2*i, "%02x", condensat[i]);
-                        }
-                        condensat_hexa[32] = '\0';
+			char condensat_hexa[33];
+			for(int i=0; i<33; i++)
+			{
+					sprintf(condensat_hexa + 2*i, "%02x", condensat[i]);
+			}
+			condensat_hexa[32] = '\0';
 
-                        printf("\n-> %s", condensat_hexa);
+			printf("\n-> %s", condensat_hexa);
 
-                        my_node = create_node(input, condensat_hexa);
-                        if(my_node != NULL){ printf("\n/!\\ Vous avez initialisé un nouveau noeud"); }
+			my_node = create_node(input, condensat_hexa);
+			if(my_node != NULL){ printf("\n/!\\ Vous avez initialisé un nouveau noeud"); }
 		}
 		else
 		{
@@ -211,29 +211,29 @@ void modeG_avec_fichier(FILE *fichier)
 
 	switch (sauvegarde)
 	{
-			case 1 : 
-					printf("/!\\ Vous avez choisi de sauvegarder\n");
+		case 1 : 
+				printf("/!\\ Vous avez choisi de sauvegarder\n");
 
-					printf("\nVeuillez entrer le nom de votre fichier de sauvegarde : ");
-					char nom[50];
-					scanf("%s", nom);
+				printf("\nVeuillez entrer le nom de votre fichier de sauvegarde : ");
+				char nom[50];
+				scanf("%s", nom);
 
-					FILE *fichier1 = fopen(nom, "w");
-					to_file(my_tree, fichier1);
-					fclose(fichier1);
+				FILE *fichier1 = fopen(nom, "w");
+				to_file(my_tree, fichier1);
+				fclose(fichier1);
 
-					break;
+				break;
 
-			case 2 : 
-					printf("/!\\ Vous avez choisi de ne pas sauvegarder\n");
-					break;
+		case 2 : 
+				printf("/!\\ Vous avez choisi de ne pas sauvegarder\n");
+				break;
 
-			default : 
-					printf("\n\tVotre choix n'est pas dans la liste. Sauvegarde dans ./default");
+		default : 
+				printf("\n\tVotre choix n'est pas dans la liste. Sauvegarde dans ./default");
 
-					FILE *fichier2 = fopen("default", "w");
-					to_file(my_tree, fichier2);
-					fclose(fichier2);
+				FILE *fichier2 = fopen("default", "w");
+				to_file(my_tree, fichier2);
+				fclose(fichier2);
 	}	
 	
 	printf("\n-----------{ Fin du mode G avec fichier: }-----------\n");
